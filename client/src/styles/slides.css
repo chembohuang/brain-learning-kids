@@ -1,0 +1,147 @@
+/* 
+ * Slides Styling & Animations
+ * Educational Design System:
+ * - Smooth transitions (200ms cubic-bezier)
+ * - Card-based layout with clear hierarchy
+ * - Emerald green (#10b981) accent color
+ * - Deep blue (#1e3a8a) primary color
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Slide Content Animations */
+.slide-content {
+  animation: slideInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide Number Animation */
+.slide-number {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Typography Classes */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Smooth Transitions */
+button,
+a,
+.card-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Button Hover Effects */
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Card Hover Effects */
+.hover\:shadow-lg:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress Bar Animation */
+@keyframes progressFill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Image Fade In */
+img {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  .slide-content {
+    padding: 1rem;
+  }
+}
+
+/* Accessibility: Focus Visible */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .slide-navigation,
+  .slide-thumbnails,
+  header,
+  footer {
+    display: none;
+  }
+  
+  .slide-container {
+    box-shadow: none;
+    page-break-after: always;
+  }
+}
+
+/* Dark Mode Support (Optional) */
+@media (prefers-color-scheme: dark) {
+  .slide-content {
+    background-color: #1f2937;
+    color: #f3f4f6;
+  }
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #10b981;
+  color: white;
+}
+
+::-moz-selection {
+  background-color: #10b981;
+  color: white;
+}

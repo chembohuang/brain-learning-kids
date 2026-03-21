@@ -1,25 +1,582 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import '../styles/slides.css';
 
 /**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
+ * Educational Design System:
+ * - Color Palette: Deep Blue (#1e3a8a) + Emerald Green (#10b981) + White
+ * - Typography: Playfair Display (titles) + Outfit (subtitles) + Inter (body)
+ * - Layout: Card-based, clear visual hierarchy, ample whitespace
+ * - Interaction: Smooth transitions (200ms), hover effects, progress indicators
  */
+
+interface Slide {
+  id: number;
+  title: string;
+  subtitle?: string;
+  content: React.ReactNode;
+  image?: string;
+  notes?: string;
+}
+
+const slides: Slide[] = [
+  {
+    id: 1,
+    title: '大脑的魔法建筑师',
+    subtitle: '学习、专注与热爱的生物学秘密',
+    content: (
+      <div className="slide-content flex flex-col items-center justify-center gap-8">
+        <img 
+          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/brain-hero-1-WwPqoKZi78CLvnmNiAF4nf.webp"
+          alt="大脑插画"
+          className="w-80 h-auto rounded-lg shadow-lg"
+        />
+        <div className="text-center space-y-4">
+          <p className="text-xl text-slate-600">为什么觉得难是一件好事？</p>
+          <p className="text-xl text-slate-600">怎样让大脑长出"高速公路"？</p>
+        </div>
+      </div>
+    ),
+    notes: '开场可以问孩子们一个问题："你们还记得第一次学骑自行车，或者第一次玩一个复杂游戏时的感觉吗？是不是觉得手脚不听使唤，脑子转不过弯？今天我们就来看看，这时候你的大脑里到底发生了什么神奇的物理变化。"'
+  },
+  {
+    id: 2,
+    title: '大脑里的"修路"游戏',
+    subtitle: '1000亿个小人在工作',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="space-y-6">
+            <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
+              <h3 className="text-emerald-700 font-bold text-lg mb-2">1000亿个小人</h3>
+              <p className="text-slate-700">你的大脑里住着大约 1000 亿个脑细胞，我们叫它们"神经元"。</p>
+            </div>
+            <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+              <h3 className="text-blue-700 font-bold text-lg mb-2">沟通的桥梁</h3>
+              <p className="text-slate-700">神经元之间通过叫作"突触"的桥梁来交流。</p>
+            </div>
+            <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
+              <h3 className="text-emerald-700 font-bold text-lg mb-2">终极魔法咒语</h3>
+              <p className="text-slate-700">科学家唐纳德·赫布发现了一个秘密：</p>
+              <p className="text-emerald-700 font-bold italic mt-2">"一起放电的神经元，会连接在一起"</p>
+            </div>
+          </div>
+          <img 
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/neural-network-EwsLkufCmyvwCB5GBs4RXz.webp"
+            alt="神经网络"
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
+        </div>
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 当你们尝试去学一个新东西时，相关的神经元就会被"点亮"。如果它们频繁地一起活跃，它们之间就会伸出小手，物理上真的连接在一起！</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 3,
+    title: '为什么刚开始学新东西会觉得"笨笨的"？',
+    subtitle: '这是大脑正在搭建新桥梁的信号',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="space-y-6">
+            <div className="bg-red-50 p-6 rounded-lg border-2 border-red-200">
+              <h3 className="text-red-700 font-bold text-lg mb-2">不稳定的初期</h3>
+              <p className="text-slate-700">遇到陌生的、困难的事物，觉得吃力是大脑最正常的生理反应。</p>
+            </div>
+            <div className="bg-orange-50 p-6 rounded-lg border-2 border-orange-200">
+              <h3 className="text-orange-700 font-bold text-lg mb-2">纤细的"树突棘"</h3>
+              <p className="text-slate-700">科学家用显微镜观察小鼠发现，在刚开始学习新任务时，大脑记忆回路里的连接是非常"不稳定"的。</p>
+            </div>
+            <div className="bg-yellow-50 p-6 rounded-lg border-2 border-yellow-200">
+              <h3 className="text-yellow-700 font-bold text-lg mb-2">施工重地</h3>
+              <p className="text-slate-700">此时的连接就像细细的走钢丝，动作当然会摇晃！</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <div className="text-6xl">🏗️</div>
+              <p className="text-xl text-slate-600 font-semibold">大脑施工中...</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 所以，千万不要害怕"觉得难"。觉得难，只是因为你们的大脑正在搭建新的桥梁，它在对你说："施工重地，请多给我一点时间！"</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 4,
+    title: '重复的魔力：让记忆"结晶"',
+    subtitle: '从泥泞小路到高速公路',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="space-y-6">
+          <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-8 rounded-lg border-2 border-blue-200">
+            <h3 className="text-blue-700 font-bold text-lg mb-3">高频放电与长时程增强 (LTP)</h3>
+            <p className="text-slate-700">不断重复练习，神经元之间就会产生持续的强电信号刺激，让连接变强。</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-slate-100 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">1️⃣</div>
+              <p className="text-sm font-semibold text-slate-700">第一次练习</p>
+              <p className="text-xs text-slate-600 mt-1">连接很弱</p>
+            </div>
+            <div className="bg-slate-200 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">🔄</div>
+              <p className="text-sm font-semibold text-slate-700">多次重复</p>
+              <p className="text-xs text-slate-600 mt-1">连接变强</p>
+            </div>
+            <div className="bg-emerald-100 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">💎</div>
+              <p className="text-sm font-semibold text-slate-700">结晶完成</p>
+              <p className="text-xs text-slate-600 mt-1">连接牢固</p>
+            </div>
+          </div>
+
+          <div className="bg-emerald-50 p-8 rounded-lg border-2 border-emerald-200">
+            <h3 className="text-emerald-700 font-bold text-lg mb-3">记忆的"结晶"</h3>
+            <p className="text-slate-700">科学家发现，随着练习时间的推移，原本摇摆不定的记忆模式会开始变得牢固，就像"结晶"一样。</p>
+          </div>
+
+          <div className="bg-blue-50 p-8 rounded-lg border-2 border-blue-200">
+            <h3 className="text-blue-700 font-bold text-lg mb-3">铺设高速公路</h3>
+            <p className="text-slate-700">经常走的泥泞小路，会被大脑铺上"柏油"（髓鞘化），让动作变成不需要思考的本能！</p>
+          </div>
+        </div>
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 困难是大脑最好的"健身教练"。那些需要付出巨大努力的复杂任务，能拯救大脑中的新细胞，让它们长久存活。</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 5,
+    title: '警惕大脑的"垃圾食品"',
+    subtitle: '短视频的危害',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="space-y-6">
+            <div className="bg-red-50 p-6 rounded-lg border-2 border-red-200">
+              <h3 className="text-red-700 font-bold text-lg mb-2">喂给大脑什么，它就变成什么</h3>
+              <p className="text-slate-700">只有克服困难，大脑才会长肌肉。</p>
+            </div>
+
+            <div className="bg-orange-50 p-6 rounded-lg border-2 border-orange-200">
+              <h3 className="text-orange-700 font-bold text-lg mb-2">《娱乐至死》的警告</h3>
+              <p className="text-slate-700">尼尔·波兹曼提出，人类可能不会被我们害怕的东西毁掉，而是会毁于我们太热爱、太让我们感到快乐的东西。</p>
+            </div>
+
+            <div className="bg-yellow-50 p-6 rounded-lg border-2 border-yellow-200">
+              <h3 className="text-yellow-700 font-bold text-lg mb-2">可怕的"现在请看这个"</h3>
+              <p className="text-slate-700">所有的内容（哪怕是严肃的知识）都被包装成了搞笑的、没有上下文的娱乐碎片。</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <div className="text-6xl">📱</div>
+              <p className="text-xl text-slate-600 font-semibold">短视频 = 大脑糖果</p>
+              <p className="text-sm text-slate-500">太容易得到，太容易上瘾</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 手机上的短视频就是这样的"糖果"。它们太容易得到了，画面一闪而过，不需要你动脑筋。吃糖很开心，但只吃糖会长不高。</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 6,
+    title: '为什么短视频会让我们失去思考力？',
+    subtitle: '被动参与 vs 主动思考',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="space-y-6">
+          <div className="bg-red-50 p-6 rounded-lg border-2 border-red-200">
+            <h3 className="text-red-700 font-bold text-lg mb-2">大脑在"偷懒"</h3>
+            <p className="text-slate-700">看视频是一种<span className="font-bold">"被动参与"</span>。大脑不需要主动去想象，连接就不会变强。</p>
+          </div>
+
+          <div className="bg-orange-50 p-6 rounded-lg border-2 border-orange-200">
+            <h3 className="text-orange-700 font-bold text-lg mb-2">摧毁注意力和逻辑</h3>
+            <p className="text-slate-700">短视频带来了极快的速度，这消灭了内容的深度，也消灭了人们的注意力。</p>
+          </div>
+
+          <div className="bg-yellow-50 p-6 rounded-lg border-2 border-yellow-200">
+            <h3 className="text-yellow-700 font-bold text-lg mb-2">失去耐心</h3>
+            <p className="text-slate-700">习惯了十几秒就要一个新刺激，一旦遇到需要安静思考的难题（比如数学题），大脑就会因为觉得"无聊"而罢工。</p>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-red-100 p-6 rounded-lg">
+            <h4 className="font-bold text-red-700 mb-3">❌ 短视频的影响</h4>
+            <ul className="text-sm text-slate-700 space-y-2">
+              <li>• 被动接收信息</li>
+              <li>• 注意力碎片化</li>
+              <li>• 无法深度思考</li>
+              <li>• 大脑不长肌肉</li>
+            </ul>
+          </div>
+          <div className="bg-emerald-100 p-6 rounded-lg">
+            <h4 className="font-bold text-emerald-700 mb-3">✅ 深度阅读的好处</h4>
+            <ul className="text-sm text-slate-700 space-y-2">
+              <li>• 主动思考</li>
+              <li>• 注意力集中</li>
+              <li>• 深度理解</li>
+              <li>• 大脑长肌肉</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 这就是信息时代带来的问题——我们接收了太多让人分心的碎片信息，却没有采取行动的能力。我们会被娱乐麻醉，忘记怎么面对真正的困难。</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 7,
+    title: '真正的"大脑健身房"',
+    subtitle: '深度阅读与专注',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="space-y-6">
+            <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
+              <h3 className="text-emerald-700 font-bold text-lg mb-2">最高级的智力体操</h3>
+              <p className="text-slate-700">波兹曼指出，阅读一本书需要你跟随作者的逻辑，这要求极强的<span className="font-bold">"主动智力参与"</span>。</p>
+            </div>
+
+            <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+              <h3 className="text-blue-700 font-bold text-lg mb-2">搭建强壮桥梁</h3>
+              <p className="text-slate-700">当你专注地阅读、不被打断时，神经元不仅在一起放电，而且在持续、稳定地放电。</p>
+            </div>
+
+            <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
+              <h3 className="text-emerald-700 font-bold text-lg mb-2">对抗碎片化</h3>
+              <p className="text-slate-700">保持专注，主动施工建桥，不做只会被动接收快乐的"沙发土豆"。</p>
+            </div>
+          </div>
+          <img 
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/focus-meditation-j9FLya6VEMt4Dso6vZhXhq.webp"
+            alt="专注冥想"
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
+        </div>
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 阅读虽然一开始比看视频费力，但这正是你的大脑在举哑铃！专注力是保护你不被"娱乐至死"吞噬的最强盾牌。</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 8,
+    title: '关于学习的巨大谎言',
+    subtitle: '"因为热爱，所以坚持"是错的',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-red-50 p-8 rounded-lg border-2 border-red-200">
+            <h3 className="text-red-700 font-bold text-2xl mb-4">❌ 谎言</h3>
+            <p className="text-lg text-slate-700 font-semibold">"因为热爱，所以坚持。"</p>
+          </div>
+          <div className="bg-emerald-50 p-8 rounded-lg border-2 border-emerald-200">
+            <h3 className="text-emerald-700 font-bold text-2xl mb-4">✅ 真相</h3>
+            <p className="text-lg text-slate-700 font-semibold">大家往往因为<span className="font-bold">"不会"</span>带来的挫败感而放弃。</p>
+          </div>
+        </div>
+
+        <div className="bg-slate-50 p-8 rounded-lg border-2 border-slate-200">
+          <h3 className="text-slate-700 font-bold text-lg mb-4">常见的误区</h3>
+          <p className="text-slate-700 mb-4">很多人学吉他、学编程三天打鱼两天晒网，沉迷短视频和游戏。这并不是因为对游戏有天然的"热爱"，而是因为<span className="font-bold">游戏把难度降到了最低，没有挫败感</span>。</p>
+          <div className="bg-white p-4 rounded border-l-4 border-slate-400">
+            <p className="text-slate-600 italic">当你对一门新学科（比如数学或英语）说"我不喜欢"时，大脑其实是在偷懒。</p>
+          </div>
+        </div>
+
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 真正的热爱，从来不是从零开始的。</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 9,
+    title: '热爱，是熟练后的最终奖励！',
+    subtitle: '胜任感 → 多巴胺 → 热爱',
+    content: (
+      <div className="slide-content space-y-8">
+        <img 
+          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/growth-mindset-VJbGQCpZRncoqjrjLEBxbq.webp"
+          alt="成长心态"
+          className="w-full h-auto rounded-lg shadow-lg mb-6"
+        />
+
+        <div className="space-y-4">
+          <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
+            <h3 className="text-emerald-700 font-bold text-lg mb-2">胜任感</h3>
+            <p className="text-slate-700">热爱不是起点，而是你熟练掌握技能后产生的结果。</p>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+            <h3 className="text-blue-700 font-bold text-lg mb-2">多巴胺正向循环</h3>
+            <p className="text-slate-700">当你经过努力，积累了"胜任感"（"哇，我能做好了！"），大脑就会分泌多巴胺。</p>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-slate-100 to-emerald-100 p-8 rounded-lg border-2 border-emerald-300">
+          <h3 className="text-center text-emerald-700 font-bold text-xl mb-6">魔法配方</h3>
+          <div className="flex items-center justify-between text-center">
+            <div className="flex-1">
+              <div className="text-3xl mb-2">💪</div>
+              <p className="font-semibold text-slate-700">努力</p>
+            </div>
+            <div className="text-2xl text-emerald-600">→</div>
+            <div className="flex-1">
+              <div className="text-3xl mb-2">✅</div>
+              <p className="font-semibold text-slate-700">做到</p>
+            </div>
+            <div className="text-2xl text-emerald-600">→</div>
+            <div className="flex-1">
+              <div className="text-3xl mb-2">🧠</div>
+              <p className="font-semibold text-slate-700">多巴胺</p>
+            </div>
+            <div className="text-2xl text-emerald-600">→</div>
+            <div className="flex-1">
+              <div className="text-3xl mb-2">😊</div>
+              <p className="font-semibold text-slate-700">快乐</p>
+            </div>
+            <div className="text-2xl text-emerald-600">→</div>
+            <div className="flex-1">
+              <div className="text-3xl mb-2">❤️</div>
+              <p className="font-semibold text-slate-700">热爱</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 热爱是胜任感积累到临界点时，大脑给你的奖励！</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 10,
+    title: '打怪升级：欺骗大脑的3个通关秘籍',
+    subtitle: '科学的学习方法',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="space-y-6">
+          <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
+            <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 秘籍1：15分钟启动法（降低抗拒）</h3>
+            <p className="text-slate-700">遇到困难任务，告诉大脑"只做 15 分钟就停"。门槛降到极低，大脑就不抗拒了。</p>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+            <h3 className="text-blue-700 font-bold text-lg mb-3">🎯 秘籍2：极小闭环反馈（切碎大怪兽）</h3>
+            <p className="text-slate-700">把大目标拆成几分钟就能验证的小目标（比如"今天只默写对3个单词"）。立刻看到成功，骗取大脑的多巴胺！</p>
+          </div>
+
+          <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
+            <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 秘籍3：降维碾压（获得胜任感）</h3>
+            <p className="text-slate-700">把技能练到 60 分，然后去教完全不会的新手（哥哥教弟弟，或者教爸爸妈妈），在"当老师"中获得巨大的自信激励！</p>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-blue-100 to-emerald-100 p-6 rounded-lg border-2 border-blue-300">
+          <h3 className="text-center text-blue-700 font-bold text-lg mb-4">三个秘籍的共同点</h3>
+          <p className="text-center text-slate-700">都是在<span className="font-bold">给大脑创造早期的正向反馈</span>，让它觉得"这件事我能做好"</p>
+        </div>
+
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 不要和大脑硬碰硬，我们要用科学的方法顺应它的机制，给它创造早期的正向反馈。</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 11,
+    title: '写给你们的最终宣言',
+    subtitle: '总结与展望',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="space-y-6">
+          <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200 hover:shadow-lg transition-shadow">
+            <h3 className="text-emerald-700 font-bold text-lg mb-2">💡 第一条宣言</h3>
+            <p className="text-slate-700">遇到困难不要怕，那是大脑在长出新突触、铺设高速公路！</p>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200 hover:shadow-lg transition-shadow">
+            <h3 className="text-blue-700 font-bold text-lg mb-2">💡 第二条宣言</h3>
+            <p className="text-slate-700">警惕被动娱乐，通过深度阅读和专注，主动锻炼强大的大脑逻辑！</p>
+          </div>
+
+          <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200 hover:shadow-lg transition-shadow">
+            <h3 className="text-emerald-700 font-bold text-lg mb-2">💡 第三条宣言</h3>
+            <p className="text-slate-700">热爱不是起点，用小目标积累"胜任感"，总有一天，曾经觉得难如登天的事，会变得像呼吸一样自然！</p>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-blue-100 via-emerald-100 to-blue-100 p-8 rounded-lg border-2 border-emerald-300">
+          <h3 className="text-center text-emerald-700 font-bold text-xl mb-4">🧠 最后的话</h3>
+          <p className="text-center text-slate-700 text-lg">下一次觉得一件事很难、想放弃，或者想立刻打开短视频逃避时，想一想你脑子里那 <span className="font-bold">1000 亿个正在努力"搭桥"的小人</span>。</p>
+          <p className="text-center text-emerald-700 font-bold text-lg mt-4">给它们一点时间，它们会还你一个超级强大的大脑！</p>
+        </div>
+
+        <img 
+          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/learning-journey-TxetaPL52bTH3yNPvioaF9.webp"
+          alt="学习之旅"
+          className="w-full h-auto rounded-lg shadow-lg"
+        />
+      </div>
+    )
+  }
+];
+
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(false);
+
+  useEffect(() => {
+    if (!isAutoPlay) return;
+    
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [isAutoPlay]);
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    setIsAutoPlay(false);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setIsAutoPlay(false);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setIsAutoPlay(false);
+  };
+
+  const slide = slides[currentSlide];
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-gradient-to-r from-blue-900 to-emerald-700 text-white py-6 shadow-lg">
+        <div className="container mx-auto px-4">
+          <h1 className="text-4xl font-bold mb-2">大脑的魔法建筑师</h1>
+          <p className="text-lg opacity-90">学习、专注与热爱的生物学秘密</p>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto">
+          {/* Slide Container */}
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden mb-8">
+            <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-12 min-h-96">
+              <div className="slide-number text-right text-sm font-semibold text-slate-500 mb-4">
+                {currentSlide + 1} / {slides.length}
+              </div>
+              
+              <h2 className="text-4xl font-bold text-blue-900 mb-2 font-playfair">
+                {slide.title}
+              </h2>
+              
+              {slide.subtitle && (
+                <p className="text-xl text-slate-600 mb-8 font-outfit">
+                  {slide.subtitle}
+                </p>
+              )}
+
+              <div className="slide-body">
+                {slide.content}
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center justify-between gap-4 mb-8">
+            <button
+              onClick={prevSlide}
+              className="flex items-center gap-2 px-6 py-3 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-semibold"
+            >
+              <ChevronLeft size={20} />
+              上一页
+            </button>
+
+            <button
+              onClick={() => setIsAutoPlay(!isAutoPlay)}
+              className={`px-6 py-3 rounded-lg font-semibold transition-colors duration-200 ${
+                isAutoPlay
+                  ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                  : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+              }`}
+            >
+              {isAutoPlay ? '⏸ 暂停' : '▶ 自动播放'}
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors duration-200 font-semibold"
+            >
+              下一页
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          {/* Slide Thumbnails */}
+          <div className="bg-white rounded-lg p-6 shadow-md">
+            <p className="text-sm font-semibold text-slate-600 mb-4">快速导航</p>
+            <div className="grid grid-cols-6 md:grid-cols-11 gap-2">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`aspect-square rounded-lg font-semibold text-sm transition-all duration-200 ${
+                    index === currentSlide
+                      ? 'bg-emerald-600 text-white shadow-lg scale-110'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Speaker Notes */}
+          {slide.notes && (
+            <div className="mt-8 bg-amber-50 border-l-4 border-amber-400 p-6 rounded-r-lg">
+              <p className="text-sm font-semibold text-amber-700 mb-2">📝 讲者提示</p>
+              <p className="text-slate-700">{slide.notes}</p>
+            </div>
+          )}
+        </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-slate-100 border-t border-slate-200 py-8 mt-12">
+        <div className="container mx-auto px-4 text-center text-slate-600">
+          <p className="text-sm">
+            这是一份为孩子们设计的科学教育课程，融合了神经科学、心理学与教育学的最新研究。
+          </p>
+          <p className="text-xs text-slate-500 mt-2">
+            适合 8-12 岁儿童 | 课程时长：约 30-45 分钟
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
