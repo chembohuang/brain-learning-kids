@@ -52,18 +52,18 @@ const slides: Slide[] = [
       <div className="slide-content space-y-8">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
-            <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
-              <h3 className="text-emerald-700 font-bold text-lg mb-2">1000亿个小人</h3>
-              <p className="text-slate-700">你的大脑里住着大约 1000 亿个脑细胞，我们叫它们"神经元"。</p>
+            <div className="bg-slate-800 p-6 rounded-lg border-2 border-emerald-500/50">
+              <h3 className="text-emerald-400 font-bold text-lg mb-2">1000亿个小人</h3>
+              <p className="text-slate-200">你的大脑里住着大约 1000 亿个脑细胞，我们叫它们"神经元"。</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
-              <h3 className="text-blue-700 font-bold text-lg mb-2">沟通的桥梁</h3>
-              <p className="text-slate-700">神经元之间通过叫作"突触"的桥梁来交流。</p>
+            <div className="bg-slate-800 p-6 rounded-lg border-2 border-blue-500/50">
+              <h3 className="text-blue-400 font-bold text-lg mb-2">沟通的桥梁</h3>
+              <p className="text-slate-200">神经元之间通过叫作"突触"的桥梁来交流。</p>
             </div>
-            <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
-              <h3 className="text-emerald-700 font-bold text-lg mb-2">终极魔法咒语</h3>
-              <p className="text-slate-700">科学家唐纳德·赫布发现了一个秘密：</p>
-              <p className="text-emerald-700 font-bold italic mt-2">"一起放电的神经元，会连接在一起"</p>
+            <div className="bg-slate-800 p-6 rounded-lg border-2 border-emerald-500/50">
+              <h3 className="text-emerald-400 font-bold text-lg mb-2">终极魔法咒语</h3>
+              <p className="text-slate-200">科学家唐纳德·赫布发现了一个秘密：</p>
+              <p className="text-emerald-400 font-bold italic mt-2">"一起放电的神经元，会连接在一起"</p>
             </div>
           </div>
           <img 
@@ -72,8 +72,8 @@ const slides: Slide[] = [
             className="w-full h-auto rounded-lg shadow-lg"
           />
         </div>
-        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
-          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 当你们尝试去学一个新东西时，相关的神经元就会被"点亮"。如果它们频繁地一起活跃，它们之间就会伸出小手，物理上真的连接在一起！</p>
+        <div className="bg-slate-800 border-l-4 border-amber-500 p-4">
+          <p className="text-slate-200"><span className="font-bold text-amber-400">讲者提示：</span> 当你们尝试去学一个新东西时，相关的神经元就会被"点亮"。如果它们频繁地一起活跃，它们之间就会伸出小手，物理上真的连接在一起！</p>
         </div>
       </div>
     )
@@ -532,12 +532,12 @@ export default function Home() {
   const slide = slides[currentSlide];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-slate-950">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-900 to-emerald-700 text-white py-6 shadow-lg">
+      <header className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white py-8 shadow-2xl border-b border-blue-500/30">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-2">大脑的魔法建筑师</h1>
-          <p className="text-lg opacity-90">学习、专注与热爱的生物学秘密</p>
+          <h1 className="text-5xl font-bold mb-2 text-blue-300">大脑的魔法建筑师</h1>
+          <p className="text-lg text-blue-200">学习、专注与热爱的生物学秘密</p>
         </div>
       </header>
 
@@ -545,18 +545,18 @@ export default function Home() {
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           {/* Slide Container */}
-          <div className="bg-white rounded-xl shadow-2xl overflow-hidden mb-8">
-            <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-12 min-h-96">
-              <div className="slide-number text-right text-sm font-semibold text-slate-500 mb-4">
+          <div className="bg-slate-900 rounded-xl shadow-2xl overflow-hidden mb-8 border border-blue-500/20">
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-12 min-h-96">
+              <div className="slide-number text-right text-sm font-semibold text-blue-400 mb-4">
                 {currentSlide + 1} / {slides.length}
               </div>
               
-              <h2 className="text-4xl font-bold text-blue-900 mb-2 font-playfair">
+              <h2 className="text-4xl font-bold text-blue-300 mb-2 font-playfair">
                 {slide.title}
               </h2>
               
               {slide.subtitle && (
-                <p className="text-xl text-slate-600 mb-8 font-outfit">
+                <p className="text-xl text-emerald-300 mb-8 font-outfit">
                   {slide.subtitle}
                 </p>
               )}
@@ -571,7 +571,7 @@ export default function Home() {
           <div className="flex items-center justify-between gap-4 mb-8">
             <button
               onClick={prevSlide}
-              className="flex items-center gap-2 px-6 py-3 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-semibold"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors duration-200 font-semibold shadow-lg border border-blue-500/50"
             >
               <ChevronLeft size={20} />
               上一页
@@ -579,10 +579,10 @@ export default function Home() {
 
             <button
               onClick={() => setIsAutoPlay(!isAutoPlay)}
-              className={`px-6 py-3 rounded-lg font-semibold transition-colors duration-200 ${
+              className={`px-6 py-3 rounded-lg font-semibold transition-colors duration-200 border ${
                 isAutoPlay
-                  ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-                  : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                  ? 'bg-emerald-600 text-white hover:bg-emerald-500 border-emerald-500/50'
+                  : 'bg-slate-700 text-slate-200 hover:bg-slate-600 border-slate-600/50'
               }`}
             >
               {isAutoPlay ? '⏸ 暂停' : '▶ 自动播放'}
@@ -590,7 +590,7 @@ export default function Home() {
 
             <button
               onClick={nextSlide}
-              className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors duration-200 font-semibold"
+              className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 transition-colors duration-200 font-semibold shadow-lg border border-emerald-500/50"
             >
               下一页
               <ChevronRight size={20} />
@@ -598,17 +598,17 @@ export default function Home() {
           </div>
 
           {/* Slide Thumbnails */}
-          <div className="bg-white rounded-lg p-6 shadow-md">
-            <p className="text-sm font-semibold text-slate-600 mb-4">快速导航</p>
+          <div className="bg-slate-900 rounded-lg p-6 shadow-md border border-slate-700">
+            <p className="text-sm font-semibold text-blue-300 mb-4">快速导航</p>
             <div className="grid grid-cols-6 md:grid-cols-12 gap-2">
               {slides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`aspect-square rounded-lg font-semibold text-sm transition-all duration-200 ${
+                  className={`aspect-square rounded-lg font-semibold text-sm transition-all duration-200 border ${
                     index === currentSlide
-                      ? 'bg-emerald-600 text-white shadow-lg scale-110'
-                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      ? 'bg-emerald-600 text-white shadow-lg scale-110 border-emerald-500'
+                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border-slate-700 hover:border-slate-600'
                   }`}
                 >
                   {index + 1}
@@ -619,17 +619,17 @@ export default function Home() {
 
           {/* Speaker Notes */}
           {slide.notes && (
-            <div className="mt-8 bg-amber-50 border-l-4 border-amber-400 p-6 rounded-r-lg">
-              <p className="text-sm font-semibold text-amber-700 mb-2">📝 讲者提示</p>
-              <p className="text-slate-700">{slide.notes}</p>
+            <div className="mt-8 bg-slate-800 border-l-4 border-amber-500 p-6 rounded-r-lg border border-slate-700">
+              <p className="text-sm font-semibold text-amber-400 mb-2">📝 讲者提示</p>
+              <p className="text-slate-200">{slide.notes}</p>
             </div>
           )}
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-100 border-t border-slate-200 py-8 mt-12">
-        <div className="container mx-auto px-4 text-center text-slate-600">
+      <footer className="bg-slate-900 border-t border-slate-700 py-8 mt-12">
+        <div className="container mx-auto px-4 text-center text-slate-400">
           <p className="text-sm">
             这是一份为孩子们设计的科学教育课程，融合了神经科学、心理学与教育学的最新研究。
           </p>
