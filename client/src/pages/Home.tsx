@@ -8,6 +8,11 @@ import '../styles/slides.css';
  * - Typography: Playfair Display (titles) + Outfit (subtitles) + Inter (body)
  * - Layout: Card-based, clear visual hierarchy, ample whitespace
  * - Interaction: Smooth transitions (200ms), hover effects, progress indicators
+ * 
+ * Slides 8-10 Optimization:
+ * - Slide 8: "我没兴趣" = "我不会" (Self-Efficacy & Competence)
+ * - Slide 9: The Awkward Phase (Clumsy Period) - The #1 reason for quitting
+ * - Slide 10: Myelination & Flow State - The critical point breakthrough
  */
 
 interface Slide {
@@ -278,96 +283,148 @@ const slides: Slide[] = [
   {
     id: 8,
     title: '关于学习的巨大谎言',
-    subtitle: '"因为热爱，所以坚持"是错的',
+    subtitle: '"我没兴趣" 其实是 "我不会"',
     content: (
       <div className="slide-content space-y-8">
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-red-50 p-8 rounded-lg border-2 border-red-200">
             <h3 className="text-red-700 font-bold text-2xl mb-4">❌ 谎言</h3>
             <p className="text-lg text-slate-700 font-semibold">"因为热爱，所以坚持。"</p>
+            <p className="text-sm text-slate-600 mt-3">这是最毒的鸡汤。</p>
           </div>
           <div className="bg-emerald-50 p-8 rounded-lg border-2 border-emerald-200">
             <h3 className="text-emerald-700 font-bold text-2xl mb-4">✅ 真相</h3>
-            <p className="text-lg text-slate-700 font-semibold">大家往往因为<span className="font-bold">"不会"</span>带来的挫败感而放弃。</p>
+            <p className="text-lg text-slate-700 font-semibold">你先变厉害了，热爱才会像条摇尾巴的宠物一样追上来。</p>
           </div>
         </div>
 
-        <div className="bg-slate-50 p-8 rounded-lg border-2 border-slate-200">
-          <h3 className="text-slate-700 font-bold text-lg mb-4">常见的误区</h3>
-          <p className="text-slate-700 mb-4">很多人学吉他、学编程三天打鱼两天晒网，沉迷短视频和游戏。这并不是因为对游戏有天然的"热爱"，而是因为<span className="font-bold">游戏把难度降到了最低，没有挫败感</span>。</p>
-          <div className="bg-white p-4 rounded border-l-4 border-slate-400">
-            <p className="text-slate-600 italic">当你对一门新学科（比如数学或英语）说"我不喜欢"时，大脑其实是在偷懒。</p>
+        <div className="bg-slate-50 p-6 rounded-lg border-2 border-slate-200 space-y-4">
+          <h3 className="text-slate-700 font-bold text-lg">🎮 游戏 vs 学习</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-red-100 p-4 rounded">
+              <p className="font-semibold text-slate-700 mb-2">❌ 你说的"没兴趣"</p>
+              <ul className="text-sm text-slate-600 space-y-1">
+                <li>• 学吉他练三天</li>
+                <li>• 健身办卡去两次</li>
+                <li>• 读书、写作、编程</li>
+              </ul>
+            </div>
+            <div className="bg-emerald-100 p-4 rounded">
+              <p className="font-semibold text-slate-700 mb-2">✅ 你真正"擅长"的</p>
+              <ul className="text-sm text-slate-600 space-y-1">
+                <li>• 刷短视频到凌晨三点</li>
+                <li>• 打游戏忘记吃饭</li>
+                <li>• 这叫你刚好擅长</li>
+              </ul>
+            </div>
           </div>
+        </div>
+
+        <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+          <h3 className="text-blue-700 font-bold text-lg mb-3">🧠 自我效能感（Self-Efficacy）</h3>
+          <p className="text-slate-700 mb-3">斯坦福大学班杜拉教授研究发现：一个人愿不愿意持续做一件事，<span className="font-bold">跟兴趣的关系微乎其微</span>，几乎完全取决于<span className="font-bold">他在早期有没有尝到过甜头</span>。</p>
+          <p className="text-slate-600 text-sm italic">"我觉得我能搞定"——这三个字就是全世界最烈性的精神兴奋剂。</p>
         </div>
 
         <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
-          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 真正的热爱，从来不是从零开始的。</p>
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 把"我没兴趣"翻译过来就是"我不会"。我们只会对自己能拿捏的事情上瘾。</p>
         </div>
       </div>
     )
   },
   {
     id: 9,
-    title: '热爱，是熟练后的最终奖励！',
-    subtitle: '胜任感 → 多巴胺 → 热爱',
+    title: '笨拙期：放弃一切的头号凶手',
+    subtitle: '为什么你觉得自己很笨？',
     content: (
       <div className="slide-content space-y-8">
-        <img 
-          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/growth-mindset-VJbGQCpZRncoqjrjLEBxbq.webp"
-          alt="成长心态"
-          className="w-full h-auto rounded-lg shadow-lg mb-6"
-        />
+        <div className="bg-red-50 p-6 rounded-lg border-2 border-red-200 space-y-4">
+          <h3 className="text-red-700 font-bold text-lg">🚨 笨拙期是什么？</h3>
+          <p className="text-slate-700">第一天去健身房，连器械怎么调都不知道。第一次打开写作软件，对着空白文档发了半小时呆。这个阶段叫"笨拙期"。</p>
+          <p className="text-slate-700 font-semibold">笨拙期是人类放弃一切技能的头号凶手。</p>
+        </div>
 
-        <div className="space-y-4">
-          <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
-            <h3 className="text-emerald-700 font-bold text-lg mb-2">胜任感</h3>
-            <p className="text-slate-700">热爱不是起点，而是你熟练掌握技能后产生的结果。</p>
-          </div>
-
-          <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
-            <h3 className="text-blue-700 font-bold text-lg mb-2">多巴胺正向循环</h3>
-            <p className="text-slate-700">当你经过努力，积累了"胜任感"（"哇，我能做好了！"），大脑就会分泌多巴胺。</p>
+        <div className="bg-orange-50 p-6 rounded-lg border-2 border-orange-200">
+          <h3 className="text-orange-700 font-bold text-lg mb-3">🧠 大脑的疼痛信号</h3>
+          <p className="text-slate-700 mb-3">当你觉得自己不胜任时，大脑的"前扣带回皮层"会剧烈活跃。这个脑区专门负责处理什么？</p>
+          <div className="bg-white p-4 rounded border-l-4 border-orange-400">
+            <p className="text-slate-700 font-semibold">社会排斥和疼痛信号。</p>
+            <p className="text-slate-600 text-sm mt-2">换句话说，觉得自己很笨这件事，对大脑而言和被人扇了一巴掌激活的是同一套疼痛回路。</p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-slate-100 to-emerald-100 p-8 rounded-lg border-2 border-emerald-300">
-          <h3 className="text-center text-emerald-700 font-bold text-xl mb-6">魔法配方</h3>
-          <div className="flex items-center justify-between text-center">
-            <div className="flex-1">
-              <div className="text-3xl mb-2">💪</div>
-              <p className="font-semibold text-slate-700">努力</p>
-            </div>
-            <div className="text-2xl text-emerald-600">→</div>
-            <div className="flex-1">
-              <div className="text-3xl mb-2">✅</div>
-              <p className="font-semibold text-slate-700">做到</p>
-            </div>
-            <div className="text-2xl text-emerald-600">→</div>
-            <div className="flex-1">
-              <div className="text-3xl mb-2">🧠</div>
-              <p className="font-semibold text-slate-700">多巴胺</p>
-            </div>
-            <div className="text-2xl text-emerald-600">→</div>
-            <div className="flex-1">
-              <div className="text-3xl mb-2">😊</div>
-              <p className="font-semibold text-slate-700">快乐</p>
-            </div>
-            <div className="text-2xl text-emerald-600">→</div>
-            <div className="flex-1">
-              <div className="text-3xl mb-2">❤️</div>
-              <p className="font-semibold text-slate-700">热爱</p>
-            </div>
-          </div>
+        <div className="bg-yellow-50 p-6 rounded-lg border-2 border-yellow-200">
+          <h3 className="text-yellow-700 font-bold text-lg mb-3">💭 大脑的高级借口</h3>
+          <p className="text-slate-700 mb-3">所以你不是在逃避困难，你是在<span className="font-bold">逃避疼痛</span>。</p>
+          <p className="text-slate-700">大脑非常体贴地帮你编了一个借口：</p>
+          <p className="text-yellow-700 font-bold text-lg mt-2 italic">"我只是不热爱而已"</p>
+          <p className="text-slate-600 text-sm mt-2">这个借口太完美了，既保全了你的自尊，又让你心安理得地退回舒适区。</p>
+        </div>
+
+        <div className="bg-red-100 p-4 rounded-lg border-2 border-red-300">
+          <p className="text-center text-red-700 font-bold text-lg">全世界90%的"我没找到热爱"</p>
+          <p className="text-center text-slate-700 mt-2">拆开包装纸一看，里面装的都是同一句话：</p>
+          <p className="text-center text-red-700 font-bold mt-2">"我没熬过笨拙期"</p>
         </div>
 
         <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
-          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 热爱是胜任感积累到临界点时，大脑给你的奖励！</p>
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 笨拙期不是你的问题，是大脑在自卫。但那些咬碎牙撑过去的人，会经历一次不可逆的变化...</p>
         </div>
       </div>
     )
   },
   {
     id: 10,
+    title: '跨越临界点：髓鞘化与热爱的诞生',
+    subtitle: '从驾校到开车高手的蜕变',
+    content: (
+      <div className="slide-content space-y-8">
+        <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200 space-y-4">
+          <h3 className="text-emerald-700 font-bold text-lg">🚗 你还记得学车吗？</h3>
+          <p className="text-slate-700">第一次坐进驾校那辆破车：左脚踩离合，右脚踩刹车，眼睛盯前方还要瞄后视镜，教练在吼你...</p>
+          <p className="text-slate-700 font-semibold mt-3">现在呢？</p>
+          <p className="text-slate-700">方向盘另一只手拿着咖啡，脑子里盘算晚上吃什么，副驾跟你聊天你还能接话，遇到加塞一脚油门一把方向闪过去。</p>
+          <p className="text-slate-700 text-sm italic mt-2">不是车变简单了，是你的大脑完成了一次静默升级。</p>
+        </div>
+
+        <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+          <h3 className="text-blue-700 font-bold text-lg mb-3">🧠 髓鞘化：大脑的超级升级</h3>
+          <p className="text-slate-700 mb-3">神经科学管这个过程叫"髓鞘化"：</p>
+          <div className="bg-white p-4 rounded space-y-2">
+            <p className="text-slate-700">• 你每重复练习一个动作</p>
+            <p className="text-slate-700">• 神经元外层就会包裹上一层叫"髓鞘"的绝缘物质</p>
+            <p className="text-slate-700 font-bold text-blue-600">• 信号传导速度暴增100倍</p>
+          </div>
+          <p className="text-slate-700 mt-3">原本需要前额叶皮层费劲调度的动作被打包下放到基底神经节，变成自动化程序。</p>
+          <p className="text-slate-700 font-semibold text-emerald-600 mt-2">大脑腾出了内存，你不再觉得累。</p>
+        </div>
+
+        <div className="bg-gradient-to-r from-slate-100 to-emerald-100 p-6 rounded-lg border-2 border-emerald-300">
+          <h3 className="text-center text-emerald-700 font-bold text-lg mb-4">临界点的魔力</h3>
+          <p className="text-center text-slate-700 mb-4">跨过临界点之后，一件事的本质属性在你的主观感受里会发生根本性的翻转：</p>
+          <div className="space-y-2 text-center">
+            <p className="text-slate-700"><span className="font-bold">耗能的</span> → 变成 <span className="font-bold text-emerald-600">省力的</span></p>
+            <p className="text-slate-700"><span className="font-bold">痛苦的</span> → 变成 <span className="font-bold text-emerald-600">舒服的</span></p>
+            <p className="text-slate-700"><span className="font-bold">被迫的</span> → 变成 <span className="font-bold text-emerald-600">主动的</span></p>
+          </div>
+        </div>
+
+        <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
+          <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 流心态（Flow State）</h3>
+          <p className="text-slate-700 mb-3">匈牙利心理学家米哈里追踪了数千名高手，从外科医生到攀岩运动员到国际象棋大师。他发现：</p>
+          <p className="text-slate-700 font-semibold">你的技能水平必须略高于当前挑战的难度。</p>
+          <p className="text-slate-700 text-sm mt-2">碾压眼前这件事的瞬间，多巴胺不请自来，你不需要靠意志力逼自己，大脑会主动催着你继续干。</p>
+          <p className="text-emerald-700 font-bold mt-3">这就是所谓热爱的真面目。</p>
+        </div>
+
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+          <p className="text-slate-700"><span className="font-bold text-amber-700">讲者提示：</span> 热爱不是从天而降的神秘召唤，它是胜任感累积到临界之后，大脑自动触发的奖励程序。</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 11,
     title: '打怪升级：欺骗大脑的3个通关秘籍',
     subtitle: '科学的学习方法',
     content: (
@@ -376,22 +433,26 @@ const slides: Slide[] = [
           <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
             <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 秘籍1：15分钟启动法（降低抗拒）</h3>
             <p className="text-slate-700">遇到困难任务，告诉大脑"只做 15 分钟就停"。门槛降到极低，大脑就不抗拒了。</p>
+            <p className="text-slate-600 text-sm mt-2">这是在利用大脑的"启动能耗原理"。抗拒最强烈的时刻不是做的过程中，而是按下开始键的那一瞬间。</p>
           </div>
 
           <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
             <h3 className="text-blue-700 font-bold text-lg mb-3">🎯 秘籍2：极小闭环反馈（切碎大怪兽）</h3>
             <p className="text-slate-700">把大目标拆成几分钟就能验证的小目标（比如"今天只默写对3个单词"）。立刻看到成功，骗取大脑的多巴胺！</p>
+            <p className="text-slate-600 text-sm mt-2">游戏为什么让人上瘾？因为它每30秒就给你发一次奖励。你需要做的就是在现实里人为制造同样密度的奖励节点。</p>
           </div>
 
           <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
             <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 秘籍3：降维碾压（获得胜任感）</h3>
             <p className="text-slate-700">把技能练到 60 分，然后去教完全不会的新手（哥哥教弟弟，或者教爸爸妈妈），在"当老师"中获得巨大的自信激励！</p>
+            <p className="text-slate-600 text-sm mt-2">当你亲眼看到对方脸上那种"你好厉害"的表情，你已经上瘾了。</p>
           </div>
         </div>
 
         <div className="bg-gradient-to-r from-blue-100 to-emerald-100 p-6 rounded-lg border-2 border-blue-300">
           <h3 className="text-center text-blue-700 font-bold text-lg mb-4">三个秘籍的共同点</h3>
           <p className="text-center text-slate-700">都是在<span className="font-bold">给大脑创造早期的正向反馈</span>，让它觉得"这件事我能做好"</p>
+          <p className="text-center text-slate-600 text-sm mt-3 italic">别对抗你的大脑，去贿赂它。</p>
         </div>
 
         <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
@@ -401,7 +462,7 @@ const slides: Slide[] = [
     )
   },
   {
-    id: 11,
+    id: 12,
     title: '写给你们的最终宣言',
     subtitle: '总结与展望',
     content: (
@@ -539,7 +600,7 @@ export default function Home() {
           {/* Slide Thumbnails */}
           <div className="bg-white rounded-lg p-6 shadow-md">
             <p className="text-sm font-semibold text-slate-600 mb-4">快速导航</p>
-            <div className="grid grid-cols-6 md:grid-cols-11 gap-2">
+            <div className="grid grid-cols-6 md:grid-cols-12 gap-2">
               {slides.map((_, index) => (
                 <button
                   key={index}
@@ -573,7 +634,7 @@ export default function Home() {
             这是一份为孩子们设计的科学教育课程，融合了神经科学、心理学与教育学的最新研究。
           </p>
           <p className="text-xs text-slate-500 mt-2">
-            适合 8-12 岁儿童 | 课程时长：约 30-45 分钟
+            适合 8-12 岁儿童 | 课程时长：约 30-45 分钟 | 共 {slides.length} 个幻灯片
           </p>
         </div>
       </footer>
