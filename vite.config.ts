@@ -153,6 +153,8 @@ function vitePluginManusDebugCollector(): Plugin {
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
 
 export default defineConfig({
+  // 子路径部署示例：VITE_BASE_PATH=/kids/ pnpm run build:static
+  base: process.env.VITE_BASE_PATH ?? "/",
   plugins,
   resolve: {
     alias: {

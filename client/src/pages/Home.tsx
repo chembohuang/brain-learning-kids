@@ -8,7 +8,7 @@ import '../styles/slides.css';
  * - Typography: Playfair Display (titles) + Outfit (subtitles) + Inter (body)
  * - Layout: Card-based, clear visual hierarchy, ample whitespace
  * - Interaction: Smooth transitions (200ms), hover effects, progress indicators
- * 
+ *
  * Slides 8-10 Optimization:
  * - Slide 8: "我没兴趣" = "我不会" (Self-Efficacy & Competence)
  * - Slide 9: The Awkward Phase (Clumsy Period) - The #1 reason for quitting
@@ -26,12 +26,61 @@ interface Slide {
 
 const slides: Slide[] = [
   {
+    id: 0,
+    title: '今天你会学到什么？',
+    subtitle: '先问几个问题',
+    content: (
+      <div className="slide-content space-y-8">
+        <p className="text-slate-300 text-center text-lg max-w-2xl mx-auto">
+          不用现在就答对——带着好奇往下听就好。
+        </p>
+        <div className="bg-gradient-to-br from-blue-950/80 via-slate-900 to-emerald-950/80 p-8 rounded-xl border-2 border-blue-500/30 shadow-lg max-w-3xl mx-auto">
+          <ul className="space-y-4 text-slate-200 text-base md:text-lg leading-relaxed list-none">
+            <li className="flex gap-3">
+              <span className="text-emerald-400 shrink-0 font-bold">？</span>
+              <span>当你学一件新东西时，大脑里到底在发生什么？</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-emerald-400 shrink-0 font-bold">？</span>
+              <span>为什么一开始会觉得自己很笨、很吃力？这一定代表你不适合吗？</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-emerald-400 shrink-0 font-bold">？</span>
+              <span>多练几次之后，为什么会从「好难」慢慢变成「好像有点会了」？</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-emerald-400 shrink-0 font-bold">？</span>
+              <span>刷短视频和认真看书、专心做一件事，对大脑有什么不一样？</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-emerald-400 shrink-0 font-bold">？</span>
+              <span>当我们说「我没兴趣」时，我们真正想说的是什么？</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-emerald-400 shrink-0 font-bold">？</span>
+              <span>「热爱」和「已经很会了」，你觉得哪一个更像起点？</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-emerald-400 shrink-0 font-bold">？</span>
+              <span>遇到困难时，有没有办法让自己更容易「先开始一点点」？</span>
+            </li>
+          </ul>
+        </div>
+        <p className="text-center text-slate-400 text-sm">
+          点「下一页」或从下方数字进入，我们从大脑的「魔法建筑师」正式开场。
+        </p>
+      </div>
+    ),
+    notes:
+      '这一页只抛问题、不给答案；可让孩子们心里选一个最想知道的，再进入正文。',
+  },
+  {
     id: 1,
     title: '大脑的魔法建筑师',
     subtitle: '学习、专注与热爱的生物学秘密',
     content: (
       <div className="slide-content flex flex-col items-center justify-center gap-8">
-        <img 
+        <img
           src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/brain-hero-1-WwPqoKZi78CLvnmNiAF4nf.webp"
           alt="大脑插画"
           className="w-80 h-auto rounded-lg shadow-lg"
@@ -47,13 +96,13 @@ const slides: Slide[] = [
   {
     id: 2,
     title: '大脑里的"修路"游戏',
-    subtitle: '1000亿个小人在工作',
+    subtitle: '1000 亿个小人在工作',
     content: (
       <div className="slide-content space-y-8">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
             <div className="bg-slate-800 p-6 rounded-lg border-2 border-emerald-500/50">
-              <h3 className="text-emerald-400 font-bold text-lg mb-2">1000亿个小人</h3>
+              <h3 className="text-emerald-400 font-bold text-lg mb-2">1000 亿个小人</h3>
               <p className="text-slate-200">你的大脑里住着大约 1000 亿个脑细胞，我们叫它们"神经元"。</p>
             </div>
             <div className="bg-slate-800 p-6 rounded-lg border-2 border-blue-500/50">
@@ -66,7 +115,7 @@ const slides: Slide[] = [
               <p className="text-emerald-400 font-bold italic mt-2">"一起放电的神经元，会连接在一起"</p>
             </div>
           </div>
-          <img 
+          <img
             src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/neural-network-EwsLkufCmyvwCB5GBs4RXz.webp"
             alt="神经网络"
             className="w-full h-auto rounded-lg shadow-lg"
@@ -123,7 +172,7 @@ const slides: Slide[] = [
             <h3 className="text-blue-700 font-bold text-lg mb-3">高频放电与长时程增强 (LTP)</h3>
             <p className="text-slate-700">不断重复练习，神经元之间就会产生持续的强电信号刺激，让连接变强。</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-slate-100 p-4 rounded-lg text-center">
               <div className="text-3xl mb-2">1️⃣</div>
@@ -268,7 +317,7 @@ const slides: Slide[] = [
               <p className="text-slate-700">保持专注，主动施工建桥，不做只会被动接收快乐的"沙发土豆"。</p>
             </div>
           </div>
-          <img 
+          <img
             src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/focus-meditation-j9FLya6VEMt4Dso6vZhXhq.webp"
             alt="专注冥想"
             className="w-full h-auto rounded-lg shadow-lg"
@@ -362,7 +411,7 @@ const slides: Slide[] = [
         </div>
 
         <div className="bg-red-100 p-4 rounded-lg border-2 border-red-300">
-          <p className="text-center text-red-700 font-bold text-lg">全世界90%的"我没找到热爱"</p>
+          <p className="text-center text-red-700 font-bold text-lg">全世界 90% 的"我没找到热爱"</p>
           <p className="text-center text-slate-700 mt-2">拆开包装纸一看，里面装的都是同一句话：</p>
           <p className="text-center text-red-700 font-bold mt-2">"我没熬过笨拙期"</p>
         </div>
@@ -393,7 +442,7 @@ const slides: Slide[] = [
           <div className="bg-white p-4 rounded space-y-2">
             <p className="text-slate-700">• 你每重复练习一个动作</p>
             <p className="text-slate-700">• 神经元外层就会包裹上一层叫"髓鞘"的绝缘物质</p>
-            <p className="text-slate-700 font-bold text-blue-600">• 信号传导速度暴增100倍</p>
+            <p className="text-slate-700 font-bold text-blue-600">• 信号传导速度暴增 100 倍</p>
           </div>
           <p className="text-slate-700 mt-3">原本需要前额叶皮层费劲调度的动作被打包下放到基底神经节，变成自动化程序。</p>
           <p className="text-slate-700 font-semibold text-emerald-600 mt-2">大脑腾出了内存，你不再觉得累。</p>
@@ -425,25 +474,25 @@ const slides: Slide[] = [
   },
   {
     id: 11,
-    title: '打怪升级：欺骗大脑的3个通关秘籍',
+    title: '打怪升级：欺骗大脑的 3 个通关秘籍',
     subtitle: '科学的学习方法',
     content: (
       <div className="slide-content space-y-8">
         <div className="space-y-6">
           <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
-            <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 秘籍1：15分钟启动法（降低抗拒）</h3>
+            <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 秘籍 1:15 分钟启动法（降低抗拒）</h3>
             <p className="text-slate-700">遇到困难任务，告诉大脑"只做 15 分钟就停"。门槛降到极低，大脑就不抗拒了。</p>
             <p className="text-slate-600 text-sm mt-2">这是在利用大脑的"启动能耗原理"。抗拒最强烈的时刻不是做的过程中，而是按下开始键的那一瞬间。</p>
           </div>
 
           <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
-            <h3 className="text-blue-700 font-bold text-lg mb-3">🎯 秘籍2：极小闭环反馈（切碎大怪兽）</h3>
-            <p className="text-slate-700">把大目标拆成几分钟就能验证的小目标（比如"今天只默写对3个单词"）。立刻看到成功，骗取大脑的多巴胺！</p>
-            <p className="text-slate-600 text-sm mt-2">游戏为什么让人上瘾？因为它每30秒就给你发一次奖励。你需要做的就是在现实里人为制造同样密度的奖励节点。</p>
+            <h3 className="text-blue-700 font-bold text-lg mb-3">🎯 秘籍 2：极小闭环反馈（切碎大怪兽）</h3>
+            <p className="text-slate-700">把大目标拆成几分钟就能验证的小目标（比如"今天只默写对 3 个单词"）。立刻看到成功，骗取大脑的多巴胺！</p>
+            <p className="text-slate-600 text-sm mt-2">游戏为什么让人上瘾？因为它每 30 秒就给你发一次奖励。你需要做的就是在现实里人为制造同样密度的奖励节点。</p>
           </div>
 
           <div className="bg-emerald-50 p-6 rounded-lg border-2 border-emerald-200">
-            <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 秘籍3：降维碾压（获得胜任感）</h3>
+            <h3 className="text-emerald-700 font-bold text-lg mb-3">🎯 秘籍 3：降维碾压（获得胜任感）</h3>
             <p className="text-slate-700">把技能练到 60 分，然后去教完全不会的新手（哥哥教弟弟，或者教爸爸妈妈），在"当老师"中获得巨大的自信激励！</p>
             <p className="text-slate-600 text-sm mt-2">当你亲眼看到对方脸上那种"你好厉害"的表情，你已经上瘾了。</p>
           </div>
@@ -490,7 +539,7 @@ const slides: Slide[] = [
           <p className="text-center text-emerald-700 font-bold text-lg mt-4">给它们一点时间，它们会还你一个超级强大的大脑！</p>
         </div>
 
-        <img 
+        <img
           src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357903112/hXbiJRdqX2LFBWjU2pL35w/learning-journey-TxetaPL52bTH3yNPvioaF9.webp"
           alt="学习之旅"
           className="w-full h-auto rounded-lg shadow-lg"
@@ -506,7 +555,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isAutoPlay) return;
-    
+
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -550,11 +599,11 @@ export default function Home() {
               <div className="slide-number text-right text-sm font-semibold text-blue-400 mb-4">
                 {currentSlide + 1} / {slides.length}
               </div>
-              
+
               <h2 className="text-4xl font-bold text-blue-300 mb-2 font-playfair">
                 {slide.title}
               </h2>
-              
+
               {slide.subtitle && (
                 <p className="text-xl text-emerald-300 mb-8 font-outfit">
                   {slide.subtitle}
